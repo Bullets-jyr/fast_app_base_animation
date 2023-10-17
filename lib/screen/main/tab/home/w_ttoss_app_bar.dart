@@ -24,36 +24,41 @@ class _TtossAppBarState extends State<TtossAppBar> {
       child: Row(
         children: [
           width10,
-          AnimatedContainer(
-            duration: 1000.ms,
-            color: _tappingCount > 2 ? Colors.red : Colors.blue,
-            height: _tappingCount > 2 ? 60 : 30,
-            child: Image.asset(
-              "$basePath/icon/toss.png",
-            ).opacity75(),
-          ),
+          // AnimatedContainer(
+          //   duration: 1000.ms,
+          //   // curve: Curves.decelerate,
+          //   // color: _tappingCount < 2 ? Colors.red : Colors.blue,
+          //   height: _tappingCount < 2 ? 60 : 30,
+          //   // Image Widget은 Container로 감싸져있으면 내부에 선언한 속성이 적용되지 않습니다.
+          //   child: Image.asset(
+          //     "$basePath/icon/toss.png",
+          //   ),
+          // ),
           AnimatedCrossFade(
-              firstChild: Image.asset(
-                "$basePath/icon/toss.png",
-                height: 30,
-              ),
-              secondChild: Image.asset(
-                "$basePath/icon/map_point.png",
-                height: 30,
-              ),
-              crossFadeState:
-                  _tappingCount > 2 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              duration: 1500.ms),
+            firstChild: Image.asset(
+              "$basePath/icon/toss.png",
+              height: 30,
+            ),
+            secondChild: Image.asset(
+              "$basePath/icon/map_point.png",
+              height: 30,
+            ),
+            crossFadeState: _tappingCount < 2
+                ? CrossFadeState.showFirst
+                : CrossFadeState.showSecond,
+            duration: 1500.ms,
+          ),
           emptyExpanded,
           _tappingCount.text.make(),
           Tap(
             onTap: () {
               setState(() {
-                if (_tappingCount > 2) {
-                  _tappingCount--;
-                } else {
-                  _tappingCount++;
-                }
+                _tappingCount++;
+                // if (_tappingCount > 2) {
+                //   _tappingCount--;
+                // } else {
+                //   _tappingCount++;
+                // }
               });
             },
             child: Image.asset(
@@ -61,7 +66,7 @@ class _TtossAppBarState extends State<TtossAppBar> {
               height: 30,
             ),
           ),
-          '<=눌러보세요'.text.make(),
+          // '<=눌러보세요'.text.make(),
           width10,
           Tap(
             onTap: () {
@@ -81,11 +86,16 @@ class _TtossAppBarState extends State<TtossAppBar> {
                     child: Container(
                       width: 6,
                       height: 6,
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.red),
                     ),
                   ))
               ],
-            ).animate().shake(duration: 2000.ms, hz: 3).then().fadeOut(duration: 1000.ms),
+            )
+                .animate()
+                .shake(duration: 2000.ms, hz: 3)
+                .then()
+                .fadeOut(duration: 1000.ms),
           ),
           width10,
         ],
