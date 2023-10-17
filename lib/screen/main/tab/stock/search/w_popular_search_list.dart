@@ -26,26 +26,30 @@ class _PopularSearchListState extends State<PopularSearchList> {
         ).pSymmetric(h: 20, v: 15),
         height20,
         ...popularStocks
-            .mapIndexed((e, index) => OpenContainer<bool>(
-                  closedColor: Colors.transparent,
-                  openColor: Colors.transparent,
-                  transitionType: ContainerTransitionType.fade,
-                  openBuilder: (context, closeFunction) => StockDetail(stockName: e.name),
-                  closedBuilder: (context, openFunction) {
-                    return Row(
-                      children: [
-                        (index + 1).text.bold.white.size(16).make(),
-                        width20,
-                        e.name.text.bold.white.size(16).make(),
-                        emptyExpanded,
-                        e.todayPercentageString.text
-                            .color(e.getTodayPercentageColor(context))
-                            .size(16)
-                            .make(),
-                      ],
-                    ).pSymmetric(h: 20, v: 20);
-                  },
-                ))
+            .mapIndexed(
+              (e, index) => OpenContainer<bool>(
+                closedColor: Colors.transparent,
+                openColor: Colors.transparent,
+                transitionType: ContainerTransitionType.fade,
+                openBuilder: (BuildContext context, VoidCallback _) {
+                  return StockDetail(stockName: e.name);
+                },
+                closedBuilder: (BuildContext context, VoidCallback action) {
+                  return Row(
+                    children: [
+                      (index + 1).text.bold.white.size(16).make(),
+                      width20,
+                      e.name.text.bold.white.size(16).make(),
+                      emptyExpanded,
+                      e.todayPercentageString.text
+                          .color(e.getTodayPercentageColor(context))
+                          .size(16)
+                          .make(),
+                    ],
+                  ).pSymmetric(h: 20, v: 20);
+                },
+              ),
+            )
             .toList()
       ],
     );
