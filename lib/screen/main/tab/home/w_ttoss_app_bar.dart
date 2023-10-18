@@ -24,16 +24,16 @@ class _TtossAppBarState extends State<TtossAppBar> {
       child: Row(
         children: [
           width10,
-          // AnimatedContainer(
-          //   duration: 1000.ms,
-          //   // curve: Curves.decelerate,
-          //   // color: _tappingCount < 2 ? Colors.red : Colors.blue,
-          //   height: _tappingCount < 2 ? 60 : 30,
-          //   // Image Widget은 Container로 감싸져있으면 내부에 선언한 속성이 적용되지 않습니다.
-          //   child: Image.asset(
-          //     "$basePath/icon/toss.png",
-          //   ),
-          // ),
+          AnimatedContainer(
+            duration: 1000.ms,
+            // curve: Curves.decelerate,
+            color: _tappingCount > 2 ? Colors.red : Colors.blue,
+            height: _tappingCount > 2 ? 60 : 30,
+            // Image Widget은 Container로 감싸져있으면 내부에 선언한 속성이 적용되지 않습니다.
+            child: Image.asset(
+              "$basePath/icon/toss.png",
+            ),
+          ).opacity75(),
           AnimatedCrossFade(
             firstChild: Image.asset(
               "$basePath/icon/toss.png",
@@ -43,7 +43,7 @@ class _TtossAppBarState extends State<TtossAppBar> {
               "$basePath/icon/map_point.png",
               height: 30,
             ),
-            crossFadeState: _tappingCount < 2
+            crossFadeState: _tappingCount > 2
                 ? CrossFadeState.showFirst
                 : CrossFadeState.showSecond,
             duration: 1500.ms,

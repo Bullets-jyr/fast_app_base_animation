@@ -89,28 +89,58 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
                   Nav.push(const OpensourceScreen());
                 },
               ),
+              // BigButton(
+              //   '애니메이션 forward',
+              //   onTap: () async {
+              //     animationController.forward();
+              //   },
+              // ),
+              // BigButton(
+              //   '애니메이션 reverse',
+              //   onTap: () async {
+              //     animationController.reverse();
+              //   },
+              // ),
+              // BigButton(
+              //   '애니메이션 repeat',
+              //   onTap: () async {
+              //     animationController.repeat();
+              //   },
+              // ),
+              // BigButton(
+              //   '애니메이션 reset',
+              //   onTap: () async {
+              //     animationController.reset();
+              //   },
+              // ),
               BigButton(
-                '애니메이션 forward',
+                '오픈소스 화면',
                 onTap: () async {
-                  animationController.forward();
+                  Nav.push(const OpensourceScreen());
                 },
               ),
               BigButton(
-                '애니메이션 reverse',
+                '오픈소스 화면',
                 onTap: () async {
-                  animationController.reverse();
+                  Nav.push(const OpensourceScreen());
                 },
               ),
               BigButton(
-                '애니메이션 repeat',
+                '오픈소스 화면',
                 onTap: () async {
-                  animationController.repeat();
+                  Nav.push(const OpensourceScreen());
                 },
               ),
               BigButton(
-                '애니메이션 reset',
+                '오픈소스 화면',
                 onTap: () async {
-                  animationController.reset();
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
                 },
               ),
               BigButton(
@@ -147,8 +177,8 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
           ),
           AnimatedAppBar(
             '설정',
-            scrollController: scrollController,
-            animationController: animationController,
+            controller: scrollController,
+            // animationController: animationController,
           )
         ],
       ),
