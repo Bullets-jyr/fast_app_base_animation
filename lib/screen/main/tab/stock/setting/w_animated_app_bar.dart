@@ -6,6 +6,7 @@ import '../../../../../common/widget/w_arrow.dart';
 class AnimatedAppBar extends StatefulWidget {
   final String title;
   final ScrollController controller;
+
   // final AnimationController animationController;
 
   const AnimatedAppBar(
@@ -21,8 +22,10 @@ class AnimatedAppBar extends StatefulWidget {
 
 class _AnimatedAppBarState extends State<AnimatedAppBar> {
   Duration get duration => 10.ms;
+
   // Duration get duration => 10.ms;
   double scrollPosition = 0;
+
   // late CurvedAnimation animation = CurvedAnimation(
   //     parent: widget.animationController, curve: Curves.bounceInOut);
 
@@ -64,6 +67,19 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
       child: SafeArea(
         child: Stack(
           children: [
+            AnimatedContainer(
+              duration: duration,
+              // padding: EdgeInsets.only(left: isNotTriggered ? 20 : 50, top: isNotTriggered ? 50 : 15),
+              padding: EdgeInsets.only(
+                  left: getValue(20, 50), top: getValue(50, 15)),
+              child: AnimatedDefaultTextStyle(
+                duration: duration,
+                // style: TextStyle(fontSize: isNotTriggered ? 30 : 15),
+                style: TextStyle(
+                    fontSize: getValue(30, 18), fontWeight: FontWeight.bold),
+                child: widget.title.text.make(),
+              ),
+            ),
             Tap(
               onTap: () {
                 Nav.pop(context);
@@ -72,15 +88,25 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                 direction: AxisDirection.left,
               ),
             ).p20(),
-            AnimatedContainer(
-              duration: duration,
-              // padding: EdgeInsets.only(left: isNotTriggered ? 20 : 50, top: isNotTriggered ? 50 : 15),
-              padding: EdgeInsets.only(left: getValue(20, 50), top: getValue(50, 15)),
-              child: AnimatedDefaultTextStyle(
-                duration: duration,
-                // style: TextStyle(fontSize: isNotTriggered ? 30 : 15),
-                style: TextStyle(fontSize: getValue(30, 18), fontWeight: FontWeight.bold),
-                child: widget.title.text.make(),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: TweenAnimationBuilder<Color?>(
+                  tween: ColorTween(
+                      begin: Colors.green,
+                      end: isTriggered ? Colors.orange : Colors.green),
+                  duration: 1000.ms,
+                  builder: (context, value, child) => ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                        value ?? Colors.green,
+                        BlendMode.modulate,
+                      ),
+                      child: child),
+                  child: Image.asset(
+                    "$basePath/icon/map_point.png",
+                    height: 60,
+                  ),
+                ),
               ),
             ),
             // Positioned(
