@@ -17,11 +17,11 @@ class SettingScreen extends StatefulWidget {
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
+// class _SettingScreenState extends State<SettingScreen> with TickerProviderStateMixin {
 class _SettingScreenState extends State<SettingScreen> with SingleTickerProviderStateMixin {
   final scrollController = ScrollController();
 
-  late final AnimationController animationController =
-      AnimationController(vsync: this, duration: 2000.ms);
+  late final AnimationController animationController = AnimationController(vsync: this, duration: 2000.ms);
 
   @override
   void initState() {
@@ -29,8 +29,11 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
       final status = animationController.status;
       switch (status) {
         case AnimationStatus.forward:
+
         case AnimationStatus.reverse:
+
         case AnimationStatus.completed:
+          
         case AnimationStatus.dismissed:
       }
     });
@@ -89,30 +92,30 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
                   Nav.push(const OpensourceScreen());
                 },
               ),
-              // BigButton(
-              //   '애니메이션 forward',
-              //   onTap: () async {
-              //     animationController.forward();
-              //   },
-              // ),
-              // BigButton(
-              //   '애니메이션 reverse',
-              //   onTap: () async {
-              //     animationController.reverse();
-              //   },
-              // ),
-              // BigButton(
-              //   '애니메이션 repeat',
-              //   onTap: () async {
-              //     animationController.repeat();
-              //   },
-              // ),
-              // BigButton(
-              //   '애니메이션 reset',
-              //   onTap: () async {
-              //     animationController.reset();
-              //   },
-              // ),
+              BigButton(
+                '애니메이션 forward',
+                onTap: () async {
+                  animationController.forward();
+                },
+              ),
+              BigButton(
+                '애니메이션 reverse',
+                onTap: () async {
+                  animationController.reverse();
+                },
+              ),
+              BigButton(
+                '애니메이션 repeat',
+                onTap: () async {
+                  animationController.repeat();
+                },
+              ),
+              BigButton(
+                '애니메이션 reset',
+                onTap: () async {
+                  animationController.reset();
+                },
+              ),
               BigButton(
                 '오픈소스 화면',
                 onTap: () async {
@@ -177,8 +180,8 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
           ),
           AnimatedAppBar(
             '설정',
-            controller: scrollController,
-            // animationController: animationController,
+            scrollController: scrollController,
+            animationController: animationController,
           )
         ],
       ),

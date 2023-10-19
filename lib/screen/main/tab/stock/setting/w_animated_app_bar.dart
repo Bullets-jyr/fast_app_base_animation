@@ -5,41 +5,50 @@ import '../../../../../common/widget/w_arrow.dart';
 
 class AnimatedAppBar extends StatefulWidget {
   final String title;
-  final ScrollController controller;
-
-  // final AnimationController animationController;
+  final ScrollController scrollController;
+  final AnimationController animationController;
 
   const AnimatedAppBar(
     this.title, {
     super.key,
-    required this.controller,
-    // required this.animationController,
+    required this.scrollController,
+    required this.animationController,
   });
 
   @override
   State<AnimatedAppBar> createState() => _AnimatedAppBarState();
 }
 
+// class _AnimatedAppBarState extends State<AnimatedAppBar> with SingleTickerProviderStateMixin {
 class _AnimatedAppBarState extends State<AnimatedAppBar> {
   Duration get duration => 10.ms;
-
-  // Duration get duration => 10.ms;
   double scrollPosition = 0;
+  // late끼리는 의존성이 연결됩니다.
+  // late final controller = AnimationController(vsync: this);
+  // late Animation animation = ColorTween(begin: Colors.blue, end: Colors.red).animate(controller)
 
-  // late CurvedAnimation animation = CurvedAnimation(
-  //     parent: widget.animationController, curve: Curves.bounceInOut);
+  late CurvedAnimation animation = CurvedAnimation(parent: widget.animationController, curve: Curves.bounceInOut);
 
   @override
   void initState() {
-    widget.controller.addListener(() {
+    // controller.forward();
+    // controller.reverse();
+    // controller.repeat();
+    // controller.animateTo(target)
+    // controller.animateBack(target)
+    widget.animationController.addListener(() {
+      setState(() {});
+    });
+
+    widget.scrollController.addListener(() {
       setState(() {
-        scrollPosition = widget.controller.position.pixels;
+        scrollPosition = widget.scrollController.position.pixels;
       });
     });
 
-    widget.controller.addListener(() {
+    widget.scrollController.addListener(() {
       setState(() {
-        scrollPosition = widget.controller.position.pixels;
+        scrollPosition = widget.scrollController.position.pixels;
       });
     });
     super.initState();
@@ -88,24 +97,22 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                 direction: AxisDirection.left,
               ),
             ).p20(),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.topRight,
-                child: TweenAnimationBuilder<Color?>(
-                  tween: ColorTween(
-                      begin: Colors.green,
-                      end: isTriggered ? Colors.orange : Colors.green),
-                  duration: 1000.ms,
-                  builder: (context, value, child) => ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        value ?? Colors.green,
-                        BlendMode.modulate,
-                      ),
-                      child: child),
-                  child: Image.asset(
-                    "$basePath/icon/map_point.png",
-                    height: 60,
-                  ),
+            Positioned(
+              left: animation.value * 200,
+              child: TweenAnimationBuilder<Color?>(
+                tween: ColorTween(
+                    begin: Colors.green,
+                    end: isTriggered ? Colors.orange : Colors.green),
+                duration: 1000.ms,
+                builder: (context, value, child) => ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      value ?? Colors.green,
+                      BlendMode.modulate,
+                    ),
+                    child: child),
+                child: Image.asset(
+                  "$basePath/icon/map_point.png",
+                  height: 60,
                 ),
               ),
             ),
