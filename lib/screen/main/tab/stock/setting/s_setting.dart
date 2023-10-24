@@ -33,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> with SingleTickerProvider
         case AnimationStatus.reverse:
 
         case AnimationStatus.completed:
-          
+
         case AnimationStatus.dismissed:
       }
     });

@@ -30,6 +30,7 @@ class _TextWatchingBearState extends State<TextWatchingBear> {
   late SMIBool smiCheck;
   late SMIBool smiHandsUp;
   late SMINumber smiLook;
+
   late SMITrigger smiSuccess;
   late SMITrigger smiFail;
 

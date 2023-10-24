@@ -16,8 +16,10 @@ class NumberDialog extends DialogWidget<int> {
 class _NotificationDialogState extends DialogState<NumberDialog> {
   final numberController = TextEditingController();
   final passwordController = TextEditingController();
+  // Focus Check
   final numberFocus = FocusNode();
   final passwordFocus = FocusNode();
+
   final textBearController = TextWatchingBearController();
 
   bool check = false;
@@ -68,11 +70,13 @@ class _NotificationDialogState extends DialogState<NumberDialog> {
                   controller: textBearController,
                 ),
               ),
+              // 숫자
               TextField(
                 focusNode: numberFocus,
                 controller: numberController,
                 keyboardType: TextInputType.number,
               ),
+              // 암호
               TextField(
                 focusNode: passwordFocus,
                 obscureText: true,

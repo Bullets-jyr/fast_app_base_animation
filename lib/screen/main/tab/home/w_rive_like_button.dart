@@ -17,8 +17,27 @@ class _RiveLikeButtonState extends State<RiveLikeButton> {
   late SMIBool smiPressed;
   late SMIBool smiHover;
 
+  // bool isLike = false;
+
+  // @override
+  // void initState() {
+  //   isLike = widget.isLike;
+  //   super.initState();
+  // }
+
+  // build가 일어날때 호출이 됩니다.
   @override
   void didUpdateWidget(covariant RiveLikeButton oldWidget) {
+    // if (oldWidget.isLike != widget.isLike) {
+    //   isLike = widget.isLike;
+    //   if (isLike) {
+    //     smiPressed.value = true;
+    //     smiHover.value = true;
+    //   } else {
+    //     smiPressed.value = false;
+    //     smiHover.value = false;
+    //   }
+    // }
     if (oldWidget.isLike != widget.isLike) {
       smiPressed.value = widget.isLike;
       smiHover.value = widget.isLike;
